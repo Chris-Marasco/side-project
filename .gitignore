@@ -50,9 +50,6 @@ Thumbs.db
 *.mov
 *.wmv
 
-#yardi-docs
-yardi-specs/
-
 */mocks/*.d.ts
 */mocks/*.js
 
