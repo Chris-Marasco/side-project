@@ -1,0 +1,43 @@
+services:
+  frontend:
+    build:
+      context: packages/frontend
+    networks:
+      - frontend-mongo
+      - frontend-backend
+    depends_on:
+      - mongo
+      - backend
+    volumes:
+      - ./packages/frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    expose:
+      - 3000:3000
+    stdin_open: true
+  backend:
+    build:
+      context: packages/backend
+    networks:
+      - backend-mongo
+      - frontend-backend
+    volumes:
+      - ./packages/backend:/usr/src/app
+      - /usr/src/app/node_modules
+    expose:
+      - 8080
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    volumes:
+      - ./packages/data:/data/db
+    networks:
+      - frontend-mongo
+      - backend-mongo
+    expose:
+      - 27017
+networks:
+  backend-mongo:
+  frontend-mongo:
+  frontend-backend:
