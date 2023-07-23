@@ -59,4 +59,4 @@ yardi-specs/
 .npmrc
 
 scripts/
-/data
+**/data
